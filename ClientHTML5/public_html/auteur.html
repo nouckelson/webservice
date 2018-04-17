@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Bibliothèque</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">     
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    </head>
+    
+    <body>
+                <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Web service Amosse</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="categorie.html">Categories</a></li>
+            <li class="active"><a href="auteur.html">Auteur</a></li>
+            <li><a href="livre.html">Livre</a></li>
+          </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>  
+                <br/><br/><br/>
+    <div class="container-fluid">
+
+      <div class="row">
+
+        <div class="col-md-12">
+                    <table class="table table-hover striped">  
+                        <thead>
+                        <tr>  
+                            <th>Id</th>  
+                            <th>Nom</th>  
+                            <th>Prenom</th> 
+                            <th>Sexe</th> 
+                            <th>Email</th> 
+                            <th>Nationalite</th> 
+                            <th>Apropos</th> 
+                        </tr>  
+                        </thead>
+                        <tbody data-bind="foreach: auteurs">  
+                            <tr>  
+                                <td><label data-bind='text: id' > </label></td>  
+                                <td><input style="width: 70%" data-bind='value: nom' /></td>  
+                                <td><input style="width: 70%" data-bind='value: prenom' /></td>
+                                <td style="width: 5%"><input style="width: 80%" maxlength="1" data-bind='value: sexe' /></td>
+                                <td><input style="width: 100%" data-bind='value: email' /></td>
+                                <td><input style="width: 60%" data-bind='value: nationalite' /></td>
+                                <td><input style="width: 100%" data-bind='value: aProposDe' /></td>
+                                <td style="width: 10%">
+                                    <a data-bind="click:update" class="btn btn-success btn-xs" ><i class="glyphicon glyphicon-pencil"></i></a>
+                                    &nbsp;|&nbsp;
+                                    <a data-bind="click:remove" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></a></td>
+
+                            </tr>  
+                    </tbody> 
+                    </table> 
+            </div><!--/.col-xs-12.col-sm-9-->
+            
+      </div><!--/row-->
+        <div class="row" data-bind="with:auteurs">
+            <fieldset style="margin: auto; width: 80%;">
+                <legend style=" border-radius: 20px; border: 1px solid #ededed; padding: 5px 10px; width:40%;">Ajouter un auteur</legend>
+                <form id="form">
+                        <h3></h3>
+                        <div class="input-group  col-md-6">
+                             <label class="input-group-addon" for="nom">Nom (*)</label>
+                             <input class="form-control" name="nom" id="nom" type="text">
+                         </div>
+                         <br />
+                         <div class="input-group  col-md-6">
+                              <label class="input-group-addon" for="prenom">Prénom (*)</label>
+                              <input class="form-control" name="prenom" id="prenom" type="text" value="">
+                          </div>
+                            <br />
+                           <div class="input-group  col-md-6">
+                              <label class="input-group-addon" for="sexe">Sexe (*)</label>
+                              <select class="form-control" name="sexe" id="sexe" >
+                                  <option value="M">Masculin</option>
+                                  <option value="F">Femini</option>
+                              </select>
+                             
+                          </div>
+                            
+                            <br />
+                           <div class="input-group  col-md-6">
+                              <label class="input-group-addon" for="email">Email (*)</label>
+                              <input class="form-control" name="email" id="email" type="email" value="">
+                          </div>
+                           <br />
+                           <div class="input-group  col-md-6">
+                              <label class="input-group-addon" for="date">Date de naissance (*)</label>
+                              <input class="form-control" name="dateDenaissance" id="dateDenaissance" type="date" value="">
+                          </div>
+                           <br />
+                          <div class="input-group  col-md-6">
+                              <label class="input-group-addon" for="nationalite">Nationalite (*)</label>
+                              <select class="form-control" name="nationalite" id="nationalite" >
+                                  <option value="HT">Haiti</option>
+                                  <option value="FR">France</option>
+                                  <option value="VZ">Venezuela</option>
+                                  <option value="US">Etat Unis</option>
+                                  <option value="CA">Canada</option>
+                              </select>
+                             
+                          </div>
+                           <br />
+                         <div class="input-group  col-md-6">
+                              <label class="input-group-addon" for="aProposDe">A propos de (*)</label>
+                              <textarea class="form-control" name="aProposDe" id="aProposDe"></textarea>
+
+                          </div>
+                            <br />
+                         <div class="col-md-6">
+                           <a  data-bind="click:add" class="btn btn-success">Ajouter une categorie</a>
+                         </div>
+                </form>
+            </fieldset>
+         </div>
+    </div>
+      <hr>
+      <footer>
+        <p>&copy; 2018 MBDS, Haiti Nouckelson, Stephane & Samuel.</p>
+      </footer>
+    </body>
+     <script src="js/jquery.min.js" type="text/javascript"></script>
+          <script src="js/knockout-3.4.2.js" type="text/javascript"></script>
+     <script src="js/knockout.mapping.js" type="text/javascript"></script>
+     <script src="js/auteur.js" type="text/javascript"></script>
+</html>

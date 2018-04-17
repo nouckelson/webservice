@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">     
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    </head>
+    
+    <body>
+                <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="index.html">Web service Amosse</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li class="active"><a href="categorie.html">Categories</a></li>
+            <li><a href="auteur.html">Auteur</a></li>
+            <li><a href="livre.html">Livre</a></li>
+          </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+        <br/><br/><br/><br/><br/>
+            
+            <div class="container">
+            <div  class="row"> 
+                <div class="col-md-12 responsive">
+                    <div><a href="listCategorie.html" class="btn btn-primary btn-sm"> <i class="glyphicon glyphicon-book"></i> Liste livre par categorie</a></div>
+                    <table class="table">  
+                        <thead class="success">
+                        <tr>  
+                            <th>Id</th>  
+                            <th>Nom</th>  
+                            <th style="width: 200px">déscription</th>  
+                        </tr>  
+                         </thead>
+                        <tbody data-bind="foreach: categories">  
+                        <tr>  
+                            <td>  
+                                <label data-bind='text: id' > </label>  
+                            </td>  
+                            <td>  
+                                <input data-bind='value: nom' />  
+                            </td>  
+                             <td >  
+                                <input style="width: 600px" class="form-control" data-bind='value: description' />  
+                            </td>  
+                            <td>
+                                <a data-bind="click:update" class="btn btn-success btn-xs" ><i class="glyphicon glyphicon-pencil"></i></a>
+                                &nbsp;|&nbsp;
+                                <a data-bind="click:remove" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></a></td>
+
+                        </tr>  
+                    </tbody> 
+                    </table>  
+                </div>  
+            </div>
+                
+                      <div class="row" data-bind="with:categories">
+                          <form id="form">
+           <h3>Ajouter une categorie</h3>
+           <div class="input-group  col-md-6">
+                <label class="input-group-addon" for="nom">Nom (*)</label>
+                <input class="form-control" name="nom" id="nom" type="text">
+            </div>
+            <br />
+            <div class="input-group  col-md-6">
+                 <label class="input-group-addon" for="description">Déscription (*)</label>
+                 <input class="form-control" name="description" id="description" type="text" value="">
+             </div>
+             
+                <br />
+            <div class="col-md-6">
+              <a  data-bind="click:add" class="btn btn-success">Ajouter une categorie</a>
+            </div>
+                </form>
+         </div>
+        </div>
+            <div class="error"></div>  
+    </body>
+     <script src="js/jquery.min.js" type="text/javascript"></script>
+     <script src="js/knockout-3.4.2.js" type="text/javascript"></script>
+     <script src="js/knockout.mapping.js" type="text/javascript"></script>
+     <script src="js/categorie.js" type="text/javascript"></script>
+</html>

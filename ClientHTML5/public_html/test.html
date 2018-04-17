@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>TODO supply a title</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    </head>
+    <body><table class="table table-hover striped">  
+                        <thead>
+                        <tr>  
+                            <th>Id</th>  
+                            <th>Titre</th>  
+                            <th>Resume</th> 
+                            <th>ISBN</th> 
+                            <th>Quantite</th> 
+                        </tr>  
+                        </thead>
+ 
+                    </table> 
+                        <form id="form">
+                        <h3></h3>
+                        <div class="input-group  col-md-6">
+                             <label class="input-group-addon" for="titre">Titre (*)</label>
+                             <input class="form-control" name="titre" id="titre" type="text">
+                         </div>
+                         <br />
+                         <div class="input-group  col-md-6">
+                              <label class="input-group-addon" for="resume">Resume (*)</label>
+                              <input class="form-control" name="resume" id="resume" type="text" value="">
+                          </div>
+                                                <br />
+                         <div class="input-group  col-md-6">
+                              <label class="input-group-addon" for="isbn">ISBN (*)</label>
+                              <input class="form-control" name="isbn" id="isbn" type="text" value="">
+                          </div>
+                                                                       <br />
+                         <div class="input-group  col-md-6">
+                              <label class="input-group-addon" for="resume">Quantite (*)</label>
+                              <input class="form-control" name="quantite" id="quantite" type="text" value="">
+                          </div>
+                                                                       
+                           <br/>
+                          
+                           
+                                                      <br />
+                         <div class="col-md-6">
+                           <a  data-bind="click:add" class="btn btn-success">Ajouter un livre</a>
+                         </div>
+                </form>
+        <p>
+    Choose some countries you'd like to visit: 
+    <select data-bind="options: availableCountries, selectedOptions: chosenCountries"></select>
+</p>
+<script src="js/jquery.min.js" type="text/javascript"></script>
+<script src="js/knockout-3.4.2.js" type="text/javascript"></script>
+<script src="js/knockout.mapping.js" type="text/javascript"></script>
+<script type="text/javascript">
+        $(function(){
+
+    getData=function () {  
+        $.ajax({  
+            url: "http://localhost:8080/bibliotheque/webresources/livre",  
+            type: "GET",  
+            headers: {Accept: "application/json"}  
+        }).done(function(smg){
+            ko.applyBindings(new ViewModel(smg)); 
+            
+        }); 
+
+    };  
+    getData();
+var Livre = function(livre) {  
+                    this.id = ko.observable(livre.id);  
+                    this.titre = ko.observable(livre.titre);  
+                    this.resume = ko.observable(livre.resume); 
+                    this.isbn = ko.observable(livre.isbn);
+                    this.quantite = ko.observable(livre.quantite); 
+                    
+
+                };  
+
+    var ViewModel = function(livres) {  
+            var self = this;  
+            //représente la liste des catégories  
+            //La fonction prend la réponse obtenue du serveur en paramètre  
+            //Ici nous supposons que vous avez chargé la liste des catégories  
+            //ko.utils.arrayMap itère sur la collection et pour chaque objet trouvé, elle crée une instance de categorie   
+            self.livres = ko.observableArray(ko.utils.arrayMap(livres, function(livre) { return new Livre(livre);}));
+            self.afficherFormulaire = ko.observable(true);
+           // availableCountries:ko.observableArray(['France', 'Germany', 'Spain']);
+    };  
+
+    
+    });
+    
+    
+                self.remove = function(livre){ 
+                    url="http://localhost:8080/bibliotheque/webresources/livre/"+livre.id();
+                        $.ajax({  
+                            url: url,  
+                            type: "DELETE",  
+                            contentType: "application/json",  
+                            headers: {Accept : "application/json"}  
+                        }).done(function(data) {  
+                          getData();
+                          location.reload();
+                        }); 
+                };  
+                    
+                    
+                self.update= function(livre) {
+                    
+                      url="http://localhost:8080/bibliotheque/webresources/livre/"+livre.id();
+                      $.ajax({
+                      method:"PUT",
+                      url: url,
+                      data:ko.toJSON(auteur, null, 2),
+                      contentType: "application/json",  
+                      headers: {Accept : "application/json"}
+                  }).done(function(data){
+                       getData();
+                       location.reload();
+                      });
+                  };
+                   
+                  
+                    self.add = function() {
+                   
+                        var titre=$('#titre').val();
+                        var resume=$('#resume').val();
+                        var isbn=$('#isbn').val();
+                        var quantite=$('#quantite').val();
+
+                        
+                        
+                        var data ="{\"titre\":\""+titre+"\",\"resume\":\""+resume+"\",\"isbn\":\""+isbn+"\",\"quantite\":\""+quantite+"\"}";
+                        url="http://localhost:8080/bibliotheque/webresources/livre";
+                            $.ajax({
+                            method:"POST",
+                            url: url,
+                            dataType: "json",
+                            contentType: 'application/json',
+                            data: data
+                            }).done(function(data){
+                                    getData();
+                                    location.reload();
+                                    
+                            });
+                    };
+    var viewModels = {
+        availableCountries : ko.observableArray(['France', 'Germany', 'Spain']),
+        chosenCountries : ko.observableArray(['Germany']) // Initially, only Germany is selected
+    };
+     
+    // ... then later ...
+    viewModels.chosenCountries.push('France'); // Now France is selected too
+    ko.applyBindings(viewModels);
+</script>
+    </body>
+</html>

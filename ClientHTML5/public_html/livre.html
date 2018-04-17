@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head>
+        <title>Bibliothèque</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">     
+        <link href="css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
+    </head>
+    
+    <body>
+                <!-- Fixed navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">Web service Amosse</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="categorie.html">Categories</a></li>
+            <li ><a href="auteur.html">Auteur</a></li>
+            <li class="active"><a href="livre.html">Livre</a></li>
+          </ul>
+
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>  
+                <br/><br/><br/>
+    <div class="container-fluid">
+
+      <div class="row">
+
+        <div class="col-md-12">
+                    <table class="table table-hover striped">  
+                        <thead>
+                        <tr>  
+                            <th>Id</th>  
+                            <th>Titre</th>  
+                            <th>Resume</th> 
+                            <th>ISBN</th> 
+                            <th>Quantite</th> 
+                            <th>Categorie</th> 
+                        </tr>  
+                        </thead>
+                        <tbody data-bind="foreach: livres">  
+                            <tr>  
+                                <td><label data-bind='text: id' > </label></td>  
+                                <td><input style="width: 70%" data-bind='value: titre' /></td>  
+                                <td><input style="width: 70%" data-bind='value: resume' /></td>
+                                <td><input style="width: 70%" data-bind='value: isbn' /></td>
+                                <td><input data-bind='value: quantite' /></td>
+                                <td><label data-bind='text: categories' > </label></td>  
+                                <td style="width: 10%">
+                                    <a data-bind="click:update" class="btn btn-success btn-xs" ><i class="glyphicon glyphicon-pencil"></i></a>
+                                    &nbsp;|&nbsp;
+                                    <a data-bind="click:remove" class="btn btn-danger btn-xs"><i class="glyphicon glyphicon-trash"></i></a></td>
+
+                            </tr>  
+                    </tbody> 
+                    </table> 
+            </div><!--/.col-xs-12.col-sm-9-->
+            
+      </div><!--/row-->
+        <div class="row" data-bind="with:livres">
+            <fieldset style="margin: auto; width: 80%;">
+                <legend style=" border-radius: 20px; border: 1px solid #ededed; padding: 5px 10px; width:40%;">Ajouter un livre</legend>
+                <form id="form">
+                        <h3></h3>
+                        <div class="input-group  col-md-6">
+                             <label class="input-group-addon" for="titre">Titre (*)</label>
+                             <input class="form-control" name="titre" id="titre" type="text">
+                         </div>
+                         <br />
+                         <div class="input-group  col-md-6">
+                              <label class="input-group-addon" for="resume">Resume (*)</label>
+                              <input class="form-control" name="resume" id="resume" type="text" value="">
+                          </div>
+                                                <br />
+                         <div class="input-group  col-md-6">
+                              <label class="input-group-addon" for="isbn">ISBN (*)</label>
+                              <input class="form-control" name="isbn" id="isbn" type="text" value="">
+                          </div>
+                                                                       <br />
+                         <div class="input-group  col-md-6">
+                              <label class="input-group-addon" for="resume">Quantite (*)</label>
+                              <input class="form-control" name="quantite" id="quantite" type="text" value="">
+                          </div>
+                                                                       
+                           <br/>
+                            <div class="input-group  col-md-6">
+                            <label class="input-group-addon" for="categorie">Categorie (*)</label>
+                            <select class="form-control" id="categorie" name="categorie"></select>
+                           
+                          </div>
+                           
+                                                      <br />
+                         <div class="col-md-6">
+                           <a  data-bind="click:add" class="btn btn-success">Ajouter un livre</a>
+                         </div>
+                </form>
+            </fieldset>
+         </div>
+      
+
+    </div>
+      <hr>
+      <footer>
+        <p>&copy; 2018 MBDS, Haiti Nouckelson, Stephane & Samuel.</p>
+      </footer>
+    </body>
+     <script src="js/jquery.min.js" type="text/javascript"></script>
+          <script src="js/knockout-3.4.2.js" type="text/javascript"></script>
+     <script src="js/knockout.mapping.js" type="text/javascript"></script>
+     <script src="js/livre.js" type="text/javascript"></script>
+
+</html>
